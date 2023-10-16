@@ -37,8 +37,8 @@ public async Task<List<Branch>> GetAllBranch()
         //}
         return branch;
     }
-    --------------------------------------------------------------------------------------------------
-    public IEnumerable<object> GetAllBranchAsEnumerable()
+--------------------------------------------------------------------------------------------------
+public IEnumerable<object> GetAllBranchAsEnumerable()
 {
     //return new List<T>();
     DataSet ds = new DataSet();
@@ -76,8 +76,8 @@ public async Task<List<Branch>> GetAllBranch()
         //}
         return branch;
     }
-    -------------------------------------------
-    public async Task<IActionResult> GetAllBranchesAsync()
+-------------------------------------------
+public async Task<IActionResult> GetAllBranchesAsync()
 {
     try
     {
