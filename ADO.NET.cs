@@ -76,16 +76,26 @@ public IEnumerable<object> GetAllBranchAsEnumerable()
         //}
         return branch;
     }
--------------------------------------------
-public async Task<IActionResult> GetAllBranchesAsync()
+----------------------------------------------JsonConvert.SerializeObject---------------------------------------------------
+public IEnumerable<Branch> GetAllBranchAsEnumerable()
 {
-    try
+    DataSet ds = new DataSet();
+    using (SqlConnection con = new SqlConnection(_connectionString))
     {
-        var branches =(IEnumerable<Branch>) _branchesRepo.GetAllBranchAsEnumerable();
-        return Ok(branches);
+        string query = "SELECT * FROM GetAll_Branches()";
+        using (SqlCommand cmd = new SqlCommand(query))
+        {
+            cmd.Connection = con;
+            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+            {
+                sda.Fill(ds);
+            }
+        }
+        string json = JsonConvert.SerializeObject(ds.Tables[0], Formatting.Indented);
+        List<Branch> branch = JsonConvert.DeserializeObject<List<Branch>>(json);
+        return branch;
     }
-    catch 
-    {
+}
         throw;
     }
 }
