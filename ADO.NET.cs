@@ -99,4 +99,42 @@ public IEnumerable<Branch> GetAllBranchAsEnumerable()
         throw;
     }
 }
+--------------------------------------------Push Json String to Stored Procedure  ------------------------------
+    //1.C#
+    public void CreateCustomerList(List<Customer> customerList)
+    {
+        string jsonString = JsonConvert.SerializeObject(customerList, Formatting.None);
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("sp_ParseJSON", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                // Pass the JSON string as a parameter
+                cmd.Parameters.AddWithValue("@json", jsonString);
+                // Execute the stored procedure
+                SqlDataReader reader = cmd.ExecuteReader();
+                // Do something with the result
+            }
+        }
+    }
+                                                *******
+    //2.T-SQL
+    ALTER PROCEDURE sp_ParseJSON
+     @json NVARCHAR(MAX)
+        AS
+        BEGIN
+          INSERT INTO [CUSMER] ([CustomerID],[CompID],[Code],[Name1],[Name2],[Phone],[Address],[Location])
+            SELECT NEWID(),[CompID],[Code],[Name1],[Name2],[Phone],[Address],[Location]
+            FROM OPENJSON(@Json)
+            WITH (
+                [CompID] NVARCHAR(MAX),
+                [Code] NVARCHAR(MAX),
+                [Name1] NVARCHAR(MAX),
+                [Name2] NVARCHAR(MAX),        
+                [Phone] NVARCHAR(MAX),        
+                [Address] NVARCHAR(MAX),        
+                [Location] NVARCHAR(MAX)      
+            )
+        END
   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
