@@ -138,4 +138,7 @@ public IEnumerable<Branch> GetAllBranchAsEnumerable()
             )
         END
     --EXEC sp_ParseJSON '[{"CustomerID":"3fa85f64-5717-4562-b3fc-2c963f66afa6","CompID":"93cfc975-517d-43c8-841b-766ec4d53f79","Code":"CU001","Name1":"CU001","Name2":"CU001","Phone":"CU001","Address":"CU001","Location":"CU001","Company":null},{"CustomerID":"3fa85f64-5717-4562-b3fc-2c963f66afa6","CompID":"93cfc975-517d-43c8-841b-766ec4d53f79","Code":"CU002","Name1":"CU002","Name2":"CU002","Phone":"CU002","Address":"CU002","Location":"CU002","Company":null},{"CustomerID":"3fa85f64-5717-4562-b3fc-2c963f66afa6","CompID":"93cfc975-517d-43c8-841b-766ec4d53f79","Code":"CU003","Name1":"CU003","Name2":"CU003","Phone":"CU003","Address":"CU003","Location":"CU003","Company":null},{"CustomerID":"3fa85f64-5717-4562-b3fc-2c963f66afa6","CompID":"93cfc975-517d-43c8-841b-766ec4d53f79","Code":"CU004","Name1":"CU004","Name2":"CU004","Phone":"CU004","Address":"CU004","Location":"CU004","Company":null},{"CustomerID":"3fa85f64-5717-4562-b3fc-2c963f66afa6","CompID":"93cfc975-517d-43c8-841b-766ec4d53f79","Code":"CU005","Name1":"CU005","Name2":"CU005","Phone":"CU005","Address":"CU005","Location":"CU005","Company":null}]'
-  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ 
+    -------------------------------------------------------Unique Key constraints for C# --------------------------------------------------
+    [Index(nameof(Code), IsUnique = true)]                                                
+    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
